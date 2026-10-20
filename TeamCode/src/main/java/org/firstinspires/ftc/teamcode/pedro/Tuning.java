@@ -1,0 +1,28 @@
+package org.firstinspires.ftc.teamcode.pedro;
+
+import com.pedropathing.follower.Follower;
+import com.pedropathing.revhub.drivetrains.Mecanum;
+import com.pedropathing.tuning.autotune.Procedure;
+import com.pedropathing.tuning.autotune.Tuner;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+
+import org.firstinspires.ftc.teamcode.pedro.procedures.PinpointTuner;
+import org.firstinspires.ftc.teamcode.pedro.procedures.Tests;
+
+public class Tuning {
+    @Tuner
+    public static Procedure tests() {
+        return new Tests(hardwareMap -> new Mecanum(hardwareMap, Constants.driveConfig), null, null);
+    }
+    @Tuner
+    public static Procedure pinpointTuner() {
+        return new PinpointTuner();
+    }
+    public static Follower create(HardwareMap h) {
+        return new Follower(
+                null,
+                new Mecanum(h, Constants.driveConfig),
+                null
+        );
+    }
+}
